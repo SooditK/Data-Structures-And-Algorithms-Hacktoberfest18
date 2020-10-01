@@ -1,40 +1,54 @@
-#include <iostream>
+#include <bits/stdc++.h>
+#include <vector>
 using namespace std;
-void bubbleSort(int *array, int n);
+
+void bubbleSort(vector<int>& a);
+
+void printVector(vector<int> a);
 
 int main()
 {
-    int arr[] = {13, 1024, 995, 5, 15, 45, 105, 1, 67};
-    int arr_size = sizeof(arr)/sizeof(arr[0]);
+#ifndef ONLINE_JUDGE
+    freopen("input.txt", "r", stdin);
+    freopen("output.txt", "w", stdout);
+#endif
+    vector<int> a;
+    int n;
+    int no_of_elements;
+    cin >> no_of_elements;
+    for (int i = 0; i < no_of_elements; i++) {
+        cin >> n;
+        a.push_back(n);
+    }
 
-    bubbleSort(arr, arr_size);
+    printVector(a);
 
-    for (int i = 0; i < arr_size; ++i)
-        std::cout << arr[i] << std::endl;
+    bubbleSort(a);
 
-    return 0;
+    printVector(a);
+
 }
 
-void bubbleSort(int *array, int n)
+void bubbleSort(vector<int>& a)
 {
-    bool swapped = true;
-    int j = 0;
-    int temp;
-
-    while (swapped)
-    {
-        swapped = false;
-        j++;
-        for (int i = 0; i < n - j; ++i)
-        {
-            if (array[i] > array[i + 1])
-            {
-                temp = array[i];
-                array[i] = array[i + 1];
-                array[i + 1] = temp;
-                swapped = true;
+    bool swapp = true;
+    while (swapp) {
+        swapp = false;
+        for (size_t i = 0; i < a.size() - 1; i++) {
+            if (a[i] > a[i + 1] ) {
+                a[i] += a[i + 1];
+                a[i + 1] = a[i] - a[i + 1];
+                a[i] -= a[i + 1];
+                swapp = true;
             }
         }
     }
 }
 
+void printVector(vector<int> a) {
+    for (size_t i = 0;  i < a.size();  i++) {
+        cout << a[i] << " ";
+
+    }
+    cout << endl;
+}
